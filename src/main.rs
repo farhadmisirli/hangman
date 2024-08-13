@@ -1,8 +1,8 @@
-use std::{io::{self, Write}, result};
+use std::io::{self, Write};
 
 fn main() {
     println!("\nWelcome to our HangMan Game.. \n");
-    let result: String = String::from("friend");
+    let answer_string: String = String::from("welcome");
     let mut wrong_attempt_count = 0;
 
     let mut answers: Vec<String> = Vec::new();
@@ -10,7 +10,7 @@ fn main() {
     loop {
         let mut _input = String::new();
 
-        for i in result.chars() {
+        for i in answer_string.chars() {
             if answers.contains(&i.to_string()) {
                 print!("{}", i.to_uppercase());
             } else {
@@ -27,7 +27,7 @@ fn main() {
             break;
         }
 
-        if answers.len() == result.len() {
+        if answers.len() == answer_string.len() {
             println!("\n CONGRATS. You WON!  🎉🎉🎉");
             break;
         }
@@ -41,13 +41,12 @@ fn main() {
             .read_line(&mut _input)
             .expect("Error reading from STDIN");
 
-        if result.contains(&_input.trim()) {
+        if !_input.trim().is_empty() && answer_string.contains(&_input.trim()) {
+            println!("asasas");
             answers.push(_input.trim().to_string());
         } else {
             wrong_attempt_count += 1;
         }
-
-        
     }
 }
 
